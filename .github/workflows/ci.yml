@@ -17,17 +17,27 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Rust from rust-toolchain.toml
         run: rustup show
-      - name: Normalize formatting for prototype build
-        run: cargo fmt --all
+      - name: Format
+        run: cargo fmt --all -- --check
       - name: Clippy
         run: cargo clippy --all-targets -- -D warnings
       - name: Tests
         run: cargo test --verbose
       - name: Release build
         run: cargo build --release --verbose
-      - name: Upload Windows prototype
+      - name: Package ready-to-run Windows build
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist/FlowRail | Out-Null
+          Copy-Item target/release/flowrail.exe dist/FlowRail/FlowRail.exe
+          Copy-Item README.md, LICENSE dist/FlowRail/
+          $hash = (Get-FileHash dist/FlowRail/FlowRail.exe -Algorithm SHA256).Hash
+          "$hash  FlowRail.exe" | Set-Content dist/FlowRail/SHA256SUMS.txt -Encoding ascii
+          Compress-Archive -Path dist/FlowRail/* -DestinationPath dist/FlowRail-Windows-x64.zip -Force
+      - name: Upload ready-to-run Windows build
         uses: actions/upload-artifact@v4
         with:
-          name: FlowRail-Windows-prototype
-          path: target/release/flowrail.exe
+          name: FlowRail-Windows-x64
+          path: dist/FlowRail-Windows-x64.zip
           if-no-files-found: error
+          retention-days: 30
