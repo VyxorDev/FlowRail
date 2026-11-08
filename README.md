@@ -6,9 +6,20 @@ FlowRail is a free, privacy-first, open-source Windows activity rail written ent
 
 > **v0.1 prototype:** draggable borderless app, not yet an edge-docked background utility. Fullscreen detection, tray, media controls, notifications, and plugins are future milestones.
 
-## Run on Windows
+## Try FlowRail — no developer tools required
 
-Prerequisites: Windows 11, Rust 1.95.0 (pinned in rust-toolchain.toml), MSVC Build Tools and the Windows SDK.
+You do **not** need Rust, Cargo, Visual Studio, or C++ Build Tools to run FlowRail.
+
+1. Open [FlowRail Windows builds](https://github.com/VyxorDev/FlowRail/actions/workflows/ci.yml).
+2. Open the latest successful **Windows Rust CI** run.
+3. Under **Artifacts**, download **FlowRail-Windows-x64**.
+4. Extract the ZIP and run `FlowRail.exe`.
+
+Each build includes a SHA-256 checksum in `SHA256SUMS.txt). FlowRail is an early prototype and is not yet code-signed or distributed as an installer.
+
+## Build from source (contributors)
+
+Building locally requires Windows 11, Rust 1.95.0 (pinned in rust-toolchain.toml), and the Visual Studio C++ Build Tools with the MSVC linker and Windows SDK.
 
     git clone https://github.com/VyxorDev/FlowRail.git
     cd FlowRail
@@ -18,7 +29,7 @@ Build an optimized executable:
 
     cargo build --release
 
-The release executable is target/release/flowrail.exe. No administrator rights or accounts are required. Settings live locally at %APPDATA%\FlowRail\settings.json.
+No administrator rights are required to run the app. Settings live locally at %APPDATA%\FlowRail\settings.json.
 
 ## Current features
 
