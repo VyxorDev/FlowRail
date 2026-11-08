@@ -1,0 +1,8 @@
+/target/
+**/*.rs.bk
+*.pdb
+.DS_Store
+.env
+.vscode/
+.idea/
+# Cargo.lock will be generated and committed after initial CI validation.

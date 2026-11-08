@@ -1,0 +1,24 @@
+[package]
+name = "flowrail"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+description = "A privacy-first contextual activity rail for Windows, written in Rust"
+license = "MIT"
+repository = "https://github.com/VyxorDev/FlowRail"
+readme = "README.md"
+keywords = ["windows", "desktop", "productivity", "rust", "launcher"]
+categories = ["gui"]
+
+[dependencies]
+eframe = { version = "0.37.0", default-features = false, features = ["wgpu", "default_fonts", "system_fonts", "accesskit"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61.2", features = ["Win32_System_SystemInformation"] }
+
+[profile.release]
+lto = "thin"
+strip = true
+codegen-units = 1

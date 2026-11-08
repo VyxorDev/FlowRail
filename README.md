@@ -2,60 +2,37 @@
 
 **Your desktop has a taskbar. It deserves a signal track.**
 
-FlowRail is a free, open-source, privacy-first **Windows activity rail** written entirely in Rust. It's **not** an Apple Dynamic Island replica: it's a user-controlled vertical signal track that surfaces actionable activity alongside your work.
+FlowRail is a free, privacy-first, open-source Windows activity rail written entirely in Rust. Its **vertical signal track** is an original Windows-first UI, not a Dynamic Island clone.
 
-> **Status: v0.1 prototype.** The initial version is a draggable, borderless app, not yet a system-tray background companion. Media, notifications, global shortcuts, edge docking, and extensions are future milestones.
-
-## Principles
-
-- Windows-first; original UI instead of copying another OS.
-- All app and UI code in Rust; no Electron, JS, Node, or webview.
-- No accounts, cloud backend, telemetry, or admin privileges.
-- Local-first, small permissions, event-driven Windows integrations.
-- Explicit controls and consideration for fullscreen apps.
+> **v0.1 prototype:** draggable borderless app, not yet an edge-docked background utility. Fullscreen detection, tray, media controls, notifications, and plugins are future milestones.
 
 ## Run on Windows
 
-Requires Windows 11, Rust **1.95.0** (pinned in `rust-toolchain.toml`), and MSVC Build Tools/Windows SDK.
+Prerequisites: Windows 11, Rust 1.95.0 (pinned in rust-toolchain.toml), MSVC Build Tools and the Windows SDK.
 
-```powershell
-git clone https://github.com/VyxorDev/FlowRail.git
-cd FlowRail
-cargo run
-```
+    git clone https://github.com/VyxorDev/FlowRail.git
+    cd FlowRail
+    cargo run
 
-For a release-mode local build:
+Build an optimized executable:
 
-```powershell
-cargo build --release
-.\target\release\flowrail.exe
-```
+    cargo build --release
 
-Preferences are local in `%APPDATA%\FlowRail\settings.json`. No administrator rights required.
+The release executable is target/release/flowrail.exe. No administrator rights or accounts are required. Settings live locally at %APPDATA%\FlowRail\settings.json.
 
-## Implemented prototype
+## Current features
 
-- Original graphite/mint signal-track UI with draggable borderless window
-- Focus session: start, pause, resume, reset
-- Priority-ordered activity stream and quiet-mode filtering
-- Real Windows system uptime via the Win32 API
-- Explorer, Windows Settings, and Task Manager quick launch
-- Persistent local Quiet and Compact preferences
-- Rust unit tests and Windows GitHub Actions CI configuration
+- Original graphite/mint signal-track interface
+- Focus session start/pause/resume/reset
+- Prioritized activity stream with Quiet filtering
+- Real Win32 system uptime and local app uptime
+- Explorer, Windows Settings and Task Manager quick actions
+- Local Quiet and Compact preferences; unit tests and Windows CI
 
-**Not yet implemented:** edge docking, tray, single instance, fullscreen detection, WinRT media sessions, notification access, clipboard history, plugin runtime, signed binaries. No one should mistake this prototype for a finished utility.
+The application contains no webviews, JavaScript, cloud backend, tracking, or advertisements. Never disable Windows security protections to run FlowRail.
 
-## Developer commands
+Developer checks: cargo fmt --all -- --check, cargo clippy --all-targets -- -D warnings, cargo test, cargo build --release.
 
-```powershell
-cargo fmt --all -- --check
-cargo clippy --all-targets -- -D warnings
-cargo test
-cargo build --release
-```
-
-See [architecture](docs/ARCHITECTURE.md), [roadmap](docs/ROADMAP.md), [security](SECURITY.md), and [contribution guide](CONTRIBUTING.md).
-
-## License
+See docs/ARCHITECTURE.md, docs/ROADMAP.md, SECURITY.md, and CONTRIBUTING.md.
 
 MIT © 2026 VyxorDev. Independent project, not affiliated with Microsoft or Apple.
