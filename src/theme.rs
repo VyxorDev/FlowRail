@@ -46,7 +46,8 @@ pub fn apply(ctx: &egui::Context) {
     visuals.hyperlink_color = ACCENT;
     ctx.set_visuals(visuals);
 
-    ctx.style_mut(|style| {
+    // egui 0.37 exposes global_style_mut for context-wide style changes.
+    ctx.global_style_mut(|style| {
         style.spacing.item_spacing = egui::vec2(10.0, 8.0);
         style.spacing.button_padding = egui::vec2(14.0, 9.0);
         style.spacing.interact_size = egui::vec2(44.0, 38.0);
