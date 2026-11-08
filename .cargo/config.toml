@@ -1,0 +1,4 @@
+# Statically link the MSVC C runtime into the Windows executable so users
+# do not need to install a separate Visual C++ runtime just to try FlowRail.
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
