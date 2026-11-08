@@ -7,23 +7,27 @@ Items below describe **planned work**, not already delivered features.
 - [x] Rust application with borderless draggable graphite/mint rail
 - [x] Actual 25-minute focus timer with start/pause/resume/reset
 - [x] Priority ordering, ID coalescing and Quiet filtering
-- [x] Genuine Windows uptime and safe predefined quick actions
+- [x] Genuine Windows system uptime and safe predefined quick actions
 - [x] Local JSON settings and Rust unit tests
 - [x] MIT license, security policy, contribution guide, documentation and CI definition
+- [x] Event-driven repaint schedule: 1 Hz focus timer, 60-second idle refresh
+- [x] Low-power GPU adapter preference and startup-only visual style configuration
+- [x] Performance budget, measurement script and premium UX contract
 - [ ] Verify Windows CI and manual launch on a Windows 11 computer
 - [ ] Commit a resolved Cargo.lock for reproducible application builds
 
 ## Milestone 1 — Resident Windows companion
 
 - [ ] System tray icon with Open, Hide and Exit commands
-- [ ] Snap the rail to a chosen monitor's Windows working area; DPI awareness
+- [ ] Snap the rail to a chosen monitor work area and respect per-monitor DPI
 - [ ] Distinct collapsed, glance and expanded states on an edge-aligned signal spine
 - [ ] Auto-hide/suppress during fullscreen games with no process injection
-- [ ] Single instance, clean teardown and optional launch on sign-in
+- [ ] Single-instance guard, clean teardown and optional launch on sign-in
+- [ ] Suspend repaint timers and nonessential providers while hidden
 - [ ] Correct tab order, accessible labels, high contrast and reduced motion
-- [ ] CPU/memory instrumentation and realistic Windows compatibility tests
+- [ ] Profile visible idle, hidden idle, animation and startup on real Windows 11 hardware
 
-**Done when:** it behaves as a genuine unobtrusive companion, not just a draggable window.
+**Done when:** it behaves as a genuine unobtrusive companion, not just a draggable window, and meets the performance contract.
 
 ## Milestone 2 — Real Windows activity
 

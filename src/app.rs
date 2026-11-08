@@ -221,10 +221,17 @@ impl eframe::App for FlowRailApp {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         let now = Instant::now();
         self.focus.tick(now);
-        if self.focus.phase() == FocusPhase::Running {
-            ui.ctx().request_repaint_after(Duration::from_millis(250));
-        }
-        ui.ctx().set_visuals(egui::Visuals::dark());
+
+        // The timer only displays whole seconds. Repaint once per second while
+        // it runs, and at most once per minute while idle. Input and window
+        // events trigger immediate frames through egui; no busy render loop.
+        let refresh_after = if self.focus.phase() == FocusPhase::Running {
+            Duration::from_secs(1)
+        } else {
+            Duration::from_secs(60)
+        };
+        ui.ctx().request_repaint_after(refresh_after);
+
         egui::CentralPanel::default()
             .frame(egui::Frame::new().fill(theme::BACKGROUND).inner_margin(18))
             .show(ui, |ui| {
